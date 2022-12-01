@@ -1,9 +1,3 @@
-import options from "../../options";
-import knex from "knex";
-
-const connection = knex(options);
-
-
 class Container {
     constructor(name){
         this.name = name;

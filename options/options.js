@@ -1,4 +1,4 @@
-export default{
+const options = {
     mysql: {
         client: 'mysql',
         connection: {
@@ -17,3 +17,5 @@ export default{
         useNullAsDefault: true
     }
 };
+
+module.exports = options;

@@ -1,9 +1,10 @@
 const express = require('express');
 const moment = require('moment');
 const app = express();
-const Container = require('./container/containerFs.js');
+const Container = require('./container/containerSQL.js');
 const {Server: HttpServer} = require('http');
 const {Server: IOServer} = require('socket.io');
+const options = require('../options/options.js')
 
 const port = 8080;
 const publicRoot = './public';
@@ -19,8 +20,8 @@ const io = new IOServer(httpServer);
 app.use(express.static(publicRoot));
 
 
-const products = new Container('./src/db/products.txt');
-const messages = new Container('./src/db/messages.txt');
+const products = new Container(options, 'products');
+const messages = new Container(options, 'messages');
 
 app.get('/', (req, res) => {
     res.send('index.html', { root: publicRoot });
