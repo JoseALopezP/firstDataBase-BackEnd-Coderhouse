@@ -1,6 +1,5 @@
 const knex = require('knex');
 const options = require('../options/options.js')
-console.log(options.sqlite3);
 
 const mySQLClient = knex(options.mysql);
 const sqliteClient = knex(options.sqlite3);

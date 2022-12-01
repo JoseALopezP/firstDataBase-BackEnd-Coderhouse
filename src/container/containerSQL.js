@@ -9,7 +9,6 @@ class Container {
     async save(object) {
         try {
             await this.connection(this.table).insert(object);
-            return id;
         } catch (error) {
             console.log(error)
         }
