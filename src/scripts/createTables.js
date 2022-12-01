@@ -1,5 +1,6 @@
 const knex = require('knex');
 const options = require('../options/options.js')
+console.log(options.sqlite3);
 
 const mySQLClient = knex(options.mysql);
 const sqliteClient = knex(options.sqlite3);
@@ -27,8 +28,8 @@ const sqliteClient = knex(options.sqlite3);
         if(!isCreated){
             await sqliteClient.schema.createTable('messages', (table) => {
                 table.increments('id')
-                table.string('date')
-                table.string('mail').notNullable()
+                table.string('time')
+                table.string('email').notNullable()
                 table.string('text')
             });
         }

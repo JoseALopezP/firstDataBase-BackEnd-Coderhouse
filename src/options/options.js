@@ -1,4 +1,5 @@
-
+const path = require('path');
+var path1 = path.resolve(__dirname, '../db/mydb.sqlite')
 const options = {
     mysql: {
         client: 'mysql',
@@ -13,7 +14,7 @@ const options = {
     sqlite3: {
         client: 'sqlite3',
         connection: {
-          filename: '../db/mydb.sqlite'
+          filename: path1
         },
         useNullAsDefault: true
       }

@@ -1,5 +1,5 @@
 const knex = require('knex');
-const options = require('../options/options.js');
+
 class Container {
     constructor(options, table) {
         this.connection = knex(options);
