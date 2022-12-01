@@ -1,4 +1,4 @@
-import knex from "knex";
+const knex = require('knex');
 class Container {
     constructor(options, table, route) {
         this.connection = knex(options);
@@ -49,3 +49,5 @@ class Container {
     }
 
 }
+
+module.exports = Container;

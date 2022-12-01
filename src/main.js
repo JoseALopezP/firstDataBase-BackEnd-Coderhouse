@@ -4,7 +4,8 @@ const app = express();
 const Container = require('./container/containerSQL.js');
 const {Server: HttpServer} = require('http');
 const {Server: IOServer} = require('socket.io');
-const options = require('../options/options.js')
+const options = require('../options/options.js');
+const createTables = require('./scripts/createTables.js');
 
 const port = 8080;
 const publicRoot = './public';
@@ -19,9 +20,11 @@ const io = new IOServer(httpServer);
 //Public
 app.use(express.static(publicRoot));
 
-
-const products = new Container(options, 'products');
-const messages = new Container(options, 'messages');
+(async () => {
+    await createTables();
+})();
+const products = new Container(options.mysql, 'products');
+const messages = new Container(options.sqlite3, 'messages');
 
 app.get('/', (req, res) => {
     res.send('index.html', { root: publicRoot });
