@@ -1,11 +1,14 @@
 const knex = require('knex');
-const options = require('../../options/options.js')
+const options = require('../options/options.js')
 
-async function createTables(){
+const mySQLClient = knex(options.mysql);
+const sqliteClient = knex(options.sqlite3);
+
+(async () => {
     // MariaDb
     try {
-        const mySQLClient = knex(options.mysql);
-        const isCreated = await mySQLClient.schema.hasTable('productos');
+        
+        const isCreated = await mySQLClient.schema.hasTable('products');
         if(!isCreated){
             await mySQLClient.schema.createTable('products', table => {
                 table.increments('id')
@@ -15,24 +18,26 @@ async function createTables(){
             })
         }
     } catch (error) {
+        console.log(2);
         console.log(error)
     }
     // SQLite3
     try {
-        const sqliteClient = knex(options.sqlite3);
-        const isCreated = await sqliteClient.schema.hasTable('productos');
+        const isCreated = await sqliteClient.schema.hasTable('messages');
         if(!isCreated){
-            await sqliteClient.schema.createTable('messages', table => {
-                table.string('date');
-                table.string('mail').notNullable();
-                table.string('text');
+            await sqliteClient.schema.createTable('messages', (table) => {
+                table.increments('id')
+                table.string('date')
+                table.string('mail').notNullable()
+                table.string('text')
             });
         }
     } catch (error) {
+        console.log(1);
         console.log(error)
     }
-}
+})();
+    
 
-module.exports = createTables;
 
 
